@@ -17,6 +17,7 @@ jobs:
       
       - name: okadminfinder installation and execution
         run: |
+           ls
            git clone https://github.com/mIcHyAmRaNe/okadminfinder3.git
            cp sites.txt /okadminfinder3
            cd okadminfinder3
