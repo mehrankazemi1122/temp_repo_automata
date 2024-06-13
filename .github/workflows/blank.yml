@@ -1,4 +1,4 @@
-name: Install Gobuster
+name: admin finder
 
 on:
   push:
@@ -18,11 +18,11 @@ jobs:
       - name: Install Gobuster
         run: go install github.com/OJ/gobuster/v3@latest
 
-      - name: Verify Gobuster installation
+      - name: execute admin finder
         run: |
           curl -s https://raw.githubusercontent.com/mehrankazemi1122/temp_repo_automata/main/admin.txt > admin.txt
           curl -s https://raw.githubusercontent.com/mehrankazemi1122/temp_repo_automata/main/sites.txt > sites.txt
-          cat sites.txt | while read -r line;do gobuster fuzz -u $line -w admin.txt -b 404 --useragent "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:125.0) Gecko/20100101 Firefox/125.0" -k -z
+          cat sites.txt | while read -r line;do gobuster fuzz -u $line -w admin.txt -b 404 --useragent "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:125.0) Gecko/20100101 Firefox/125.0" -k -z;done
 
 
 
