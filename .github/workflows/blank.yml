@@ -1,0 +1,25 @@
+name: Install okadminfinder
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Set up Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.21
+      
+      - name: okadminfinder installation and execution
+        run: |
+           git clone https://github.com/mIcHyAmRaNe/okadminfinder3.git
+           cd okadminfinder3
+           chmod +x okadminfinder.py
+           pip3 install -r requirements.txt
+           cat ../sites.txt | while read line;do ./okadminfinder -u "https://$line";done
+           
