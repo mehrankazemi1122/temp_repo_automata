@@ -1,4 +1,4 @@
-name: Install okadminfinder
+name: Install Gobuster
 
 on:
   push:
@@ -14,13 +14,16 @@ jobs:
         uses: actions/setup-go@v2
         with:
           go-version: 1.21
-      
-      - name: okadminfinder installation and execution
+
+      - name: Install Gobuster
+        run: go install github.com/OJ/gobuster/v3@latest
+
+      - name: Verify Gobuster installation
         run: |
-           git clone https://github.com/mIcHyAmRaNe/okadminfinder3.git
-           cd okadminfinder3
-           curl -s https://raw.githubusercontent.com/mehrankazemi1122/temp_repo_automata/main/sites.txt > sites.txt
-           chmod +x okadminfinder.py
-           pip3 install -r requirements.txt
-           cat sites.txt | while read line;do ./okadminfinder.py -u "https://$line";done
-           
+          curl -s https://raw.githubusercontent.com/mehrankazemi1122/temp_repo_automata/main/admin.txt > admin.txt
+          curl -s https://raw.githubusercontent.com/mehrankazemi1122/temp_repo_automata/main/sites.txt > sites.txt
+          cat sites.txt | while read -r line;do gobuster fuzz -u $line -w admin.txt -b 404 --useragent "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:125.0) Gecko/20100101 Firefox/125.0" -k -z
+
+
+
+          
