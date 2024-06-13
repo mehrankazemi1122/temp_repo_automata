@@ -18,8 +18,9 @@ jobs:
       - name: okadminfinder installation and execution
         run: |
            git clone https://github.com/mIcHyAmRaNe/okadminfinder3.git
+           cp sites.txt /okadminfinder3
            cd okadminfinder3
            chmod +x okadminfinder.py
            pip3 install -r requirements.txt
-           cat ../sites.txt | while read line;do ./okadminfinder -u "https://$line";done
+           cat sites.txt | while read line;do ./okadminfinder -u "https://$line";done
            
