@@ -22,5 +22,5 @@ jobs:
            curl -s https://raw.githubusercontent.com/mehrankazemi1122/temp_repo_automata/main/sites.txt > sites.txt
            chmod +x okadminfinder.py
            pip3 install -r requirements.txt
-           cat sites.txt | while read line;do ./okadminfinder -u "https://$line";done
+           cat sites.txt | while read line;do ./okadminfinder.py -u "https://$line";done
            
