@@ -27,7 +27,7 @@ jobs:
           curl -s https://raw.githubusercontent.com/mehrankazemi1122/temp_repo_automata/main/sites.txt > sites.txt
           ls
           cat sites.txt | dnsx -silent | httpx -silent > resolved_sites.txt
-          cat resolved_sites.txt | while read -r line;do gobuster fuzz -u $line/FUZZ -w admin.txt -b 404 --useragent "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:125.0) Gecko/20100101 Firefox/125.0" -r -k -z;done
+          cat resolved_sites.txt | while read -r line;do gobuster fuzz -u $line/FUZZ -w admin.txt -b 404,403,500 --useragent "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:125.0) Gecko/20100101 Firefox/125.0" -r -k -z;done
 
 
 
