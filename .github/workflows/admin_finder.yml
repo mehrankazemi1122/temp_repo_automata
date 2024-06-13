@@ -15,15 +15,19 @@ jobs:
         with:
           go-version: 1.21
 
-      - name: Install Gobuster
-        run: go install github.com/OJ/gobuster/v3@latest
+      - name: Install Gobuster and dnsX and httpX
+        run: |
+          go install github.com/OJ/gobuster/v3@latest
+          go install -v github.com/projectdiscovery/dnsx/cmd/dnsx@latest
+          go install -v github.com/projectdiscovery/httpx/cmd/httpx@latest
 
       - name: execute admin finder
         run: |
           curl -s https://raw.githubusercontent.com/mehrankazemi1122/temp_repo_automata/main/admin.txt > admin.txt
           curl -s https://raw.githubusercontent.com/mehrankazemi1122/temp_repo_automata/main/sites.txt > sites.txt
           ls
-          cat sites.txt | while read -r line;do gobuster fuzz -u https://$line/FUZZ -w admin.txt -b 404 --useragent "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:125.0) Gecko/20100101 Firefox/125.0" -r -k -z;done
+          cat sites.txt | dnsx -silent | httpx -silent > resolved_sites.txt
+          cat resolved_sites.txt | while read -r line;do gobuster fuzz -u $line/FUZZ -w admin.txt -b 404 --useragent "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:125.0) Gecko/20100101 Firefox/125.0" -r -k -z;done
 
 
 
