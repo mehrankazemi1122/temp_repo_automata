@@ -14,6 +14,14 @@ jobs:
         uses: actions/setup-go@v2
         with:
           go-version: 1.21
+
+      - name: okadminfinder installation and execution
+        run: |
+           ls 
+           cd ..
+           ls
+           cd ..
+           ls
       
       - name: okadminfinder installation and execution
         run: |
